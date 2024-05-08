@@ -2,10 +2,13 @@ package com.example.scbapi.service;
 
 import com.example.scbapi.model.entity.Endereco;
 import com.example.scbapi.model.repository.EnderecoRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EnderecoService {
     private EnderecoRepository repository;
 
@@ -13,7 +16,7 @@ public class EnderecoService {
         this.repository = repository;
     }
 
-    public List<Endereco> getEndereco(){
+    public List<Endereco> getEnderecos(){
         return repository.findAll();
     }
 
@@ -21,4 +24,8 @@ public class EnderecoService {
         return repository.findById(id);
     }
 
+    @Transactional
+    public Endereco salvar(Endereco endereco) {
+        return repository.save(endereco);
+    }
 }
